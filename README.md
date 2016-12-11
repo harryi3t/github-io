@@ -1,4 +1,6 @@
 ### GithubIO: Github Issue Opener
+[![Travis Status][travis-badge]][travis-project]
+[![Shippable Status][shippable-badge]][shippable-project]
 
 I have created this script to help me open issues automatically in appropriate repositories after reading the details from a so called `PM Issue`.
 
@@ -57,4 +59,10 @@ The value `wwwRepo` from the description has overridden the default repo value
 The value `docsRepo` from the description has overridden the default repo value
   - __Title__: `DEV 1234.7 [docs] Update the docs for TODO`
 
-![image](https://cloud.githubusercontent.com/assets/5207331/21080518/35d4bd40-bfd7-11e6-9a46-48ed08779fa6.png)
+![image][screenshot]
+
+[screenshot]: https://cloud.githubusercontent.com/assets/5207331/21080518/35d4bd40-bfd7-11e6-9a46-48ed08779fa6.png
+[travis-badge]: https://travis-ci.org/harryi3t/githubIO.svg?branch=master
+[shippable-badge]: https://img.shields.io/shippable/584d675f938d4210003b61db.svg?label=shippable
+[shippable-project]: https://app.shippable.com/projects/584d675f938d4210003b61db/status/dashboard
+[travis-project]: https://travis-ci.org/harryi3t/githubIO
