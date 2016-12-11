@@ -17,7 +17,10 @@ module.exports = function (grunt) {
         files: {
           'dist/Adapter.js': 'src/Adapter.js',
           'dist/logger.js': 'src/logger.js',
-          'dist/script.js': 'src/script.js'
+          'dist/script.js': 'src/script.js',
+          'dist/parser.js': 'src/parser.js',
+          'dist/Task.js': 'src/Task.js',
+          'dist/icons.js': 'src/icons.js'
         }
       }
     },
