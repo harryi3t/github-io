@@ -4,6 +4,8 @@ import fs from 'fs';
 import GithubAdapter from './Adapter.js';
 import logger from './logger.js';
 import prompt from 'prompt';
+import parser from './parser';
+import icons from './icons';
 
 var githubUrl = 'https://github.com';
 var userinput = {
@@ -12,23 +14,6 @@ var userinput = {
   issueNumber: 0,
   defaultRepo: null
 };
-
-class Task {
-  constructor(number, title, repo, description) {
-    this.number = number;
-    this.title = title;
-    this.repo = repo;
-    this.description = description;
-  }
-  getIssue() {
-    return {
-      title: `DEV ${userinput.issueNumber}.${this.number} ${this.title}`,
-      body: `${githubUrl}/${userinput.owner}/${userinput.repo}/issues/${userinput.issueNumber}
-
-${this.description}`
-    }
-  }
-}
 
 init();
 
@@ -55,10 +40,10 @@ function init() {
     ],
     function (err) {
       if (err)
-        logger.error('>Completed with error: ', err);
+        logger.error(icons.cross, 'Completed with error: ', err);
     }
   );
-1}
+}
 
 function _parsePMIssue(bag, next) {
   var pmIssueUrl = process.argv[2];
@@ -201,8 +186,9 @@ function _parseBody(bag, next) {
   var who = `${bag.who} | ${_parseBody.name}`;
   logger.debug(`>Inside ${who}`);
 
-  bag.tasks = __parseScenarios(bag.body);
+  bag.tasks = parser(bag.body, bag.userinput);
   console.log(`\n${bag.tasks.length} task(s) parsed`);
+  bag.tasks.forEach((task) => task.print());
   return next();
 }
 
@@ -211,28 +197,26 @@ function _createIssues(bag, next) {
   logger.debug(`>Inside ${who}`);
 
   async.each(bag.tasks,
-    function (task, nextTask) {
-      bag.adapter.postIssue(bag.userinput.owner, task.repo, task.getIssue(),
-        function (err, obj) {
-          return nextTask(err);
-        }
-      );
+    function (task, nextTask,) {
+      var delay = bag.tasks.indexOf(task) * 50;
+
+      // to open issues in series, without using async.series
+      // this is much faster than using async.series
+      setTimeout(() => {
+        bag.adapter.postIssue(task.owner, task.repo, task.getIssue(),
+          function (err, obj) {
+            if (err)
+              logger.error(icons.cross, task.title);
+            else
+              logger.info(icons.check, task.title);
+
+            return nextTask(err);
+          }
+        );
+      },delay);
     },
     function (err) {
       return next(err);
     }
   );
 }
-
-function __parseScenarios(text) {
-  return [
-    new Task(1, 'Dev task complete', 'testApi', 'sample description'),
-    new Task(2, 'Test task complete', 'testApi', 'sample multiline description.\nThis is just another comment'),
-    new Task(3.1, 'do something', 'testWWW', ''),
-    new Task(3.2, 'do something stage 2', 'testWWW', ''),
-    new Task(3.3, 'do something stage 2', 'testWWW', ''),
-    new Task(4, 'docs update', 'testWWW', ''),
-  ]
-}
-
-//adapter.getRateLimit(function (x,y) {console.log('limit',x,y);})
