@@ -1,7 +1,7 @@
 import logger from './logger';
 import Task from './Task';
 
-export default function (text, userinput) {
+export function parse(text, userinput) {
   let tasks = [];
   const listRegex = '- \\[ \\]';
   const numberRegex1 = '\\*\\*([0-9])\\*\\*';

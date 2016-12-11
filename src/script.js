@@ -4,7 +4,7 @@ import fs from 'fs';
 import GithubAdapter from './Adapter.js';
 import logger from './logger.js';
 import prompt from 'prompt';
-import parser from './parser';
+import {parse} from './parser';
 import icons from './icons';
 
 var githubUrl = 'https://github.com';
@@ -185,8 +185,7 @@ function _getIssue(bag, next) {
 function _parseBody(bag, next) {
   var who = `${bag.who} | ${_parseBody.name}`;
   logger.debug(`>Inside ${who}`);
-
-  bag.tasks = parser(bag.body, bag.userinput);
+  bag.tasks = parse(bag.body, bag.userinput);
   console.log(`\n${bag.tasks.length} task(s) parsed`);
   bag.tasks.forEach((task) => task.print());
   return next();
