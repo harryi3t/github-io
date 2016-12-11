@@ -4,7 +4,7 @@ module.exports = function (grunt) {
     watch: {
       scripts: {
         files: [
-          'src/*.js',
+          'src/**/*.js',
         ],
         tasks: ['babel'],
         options: {
@@ -20,7 +20,8 @@ module.exports = function (grunt) {
           'dist/script.js': 'src/script.js',
           'dist/parser.js': 'src/parser.js',
           'dist/Task.js': 'src/Task.js',
-          'dist/icons.js': 'src/icons.js'
+          'dist/icons.js': 'src/icons.js',
+          'dist/test/parser.js': 'src/test/parser.js'
         }
       }
     },
