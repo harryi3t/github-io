@@ -56,3 +56,5 @@ The value `wwwRepo` from the description has overridden the default repo value
 #### Following tasks will be opened in https://github.com/orgName/docsRepo
 The value `docsRepo` from the description has overridden the default repo value
   - __Title__: `DEV 1234.7 [docs] Update the docs for TODO`
+
+![image](https://cloud.githubusercontent.com/assets/5207331/21080518/35d4bd40-bfd7-11e6-9a46-48ed08779fa6.png)
