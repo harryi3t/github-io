@@ -195,28 +195,31 @@ function _parseBody(bag, next) {
 function _createIssues(bag, next) {
   var who = `${bag.who} | ${_createIssues.name}`;
   logger.debug(`>Inside ${who}`);
+  var error = '';
 
   async.each(bag.tasks,
     function (task, nextTask,) {
       var delay = bag.tasks.indexOf(task) * 50;
-
       // to open issues in series, without using async.series
       // this is much faster than using async.series
       setTimeout(() => {
         bag.adapter.postIssue(task.owner, task.repo, task.getIssue(),
           function (err, obj) {
-            if (err)
-              logger.error(icons.cross, task.title);
-            else
+            if (!err)
               logger.info(icons.check, task.title);
+            else {
+              logger.error(icons.cross, task.title);
+              logger.error('  ', `Repo not found ${task.owner}/${task.repo}`);
+              error = `Some repo(s) not found`;
+            }
 
-            return nextTask(err);
+            return nextTask();
           }
         );
       },delay);
     },
     function (err) {
-      return next(err);
+      return next(error);
     }
   );
 }
