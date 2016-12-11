@@ -1,16 +1,12 @@
-'use strict';
-var self = Adapter;
-module.exports = self;
-var url = 'https://api.github.com';
+const async = require('async');
+const parseLinks = require('parse-links');
+const querystring = require('querystring');
+const request = require('request');
+const util = require('util');
+const url = 'https://api.github.com';
+const self = Adapter;
 
-var async = require('async');
-var request = require('request');
-var util = require('util');
-
-var querystring = require('querystring');
-var parseLinks = require('parse-links');
-
-function Adapter(token) {
+export default function Adapter(token) {
   this.token = token;
   if (url) {
     this.baseUrl = url;
@@ -21,7 +17,7 @@ function Adapter(token) {
 }
 
 Adapter.prototype.get = function (relativeUrl, callback) {
-  var opts = {
+  const opts = {
     method: 'GET',
     url: relativeUrl.indexOf('http') === 0 ? relativeUrl : this.baseUrl +
     relativeUrl,
@@ -33,7 +29,7 @@ Adapter.prototype.get = function (relativeUrl, callback) {
     }
   };
 
-  var bag = {
+  let bag = {
     opts: opts,
     relativeUrl: relativeUrl,
     token: this.token
@@ -50,7 +46,7 @@ Adapter.prototype.get = function (relativeUrl, callback) {
 };
 
 Adapter.prototype.post = function (relativeUrl, json, callback) {
-  var opts = {
+  const opts = {
     method: 'POST',
     url: this.baseUrl + relativeUrl,
     followAllRedirects: true,
@@ -62,7 +58,7 @@ Adapter.prototype.post = function (relativeUrl, json, callback) {
     },
     json: json
   };
-  var bag = {
+  let bag = {
     opts: opts,
     relativeUrl: relativeUrl,
     token: this.token
@@ -80,7 +76,7 @@ Adapter.prototype.post = function (relativeUrl, json, callback) {
 };
 
 Adapter.prototype.put = function (relativeUrl, json, callback) {
-  var opts = {
+  const opts = {
     method: 'PUT',
     url: this.baseUrl + relativeUrl,
     headers: {
@@ -91,7 +87,7 @@ Adapter.prototype.put = function (relativeUrl, json, callback) {
     },
     json: json
   };
-  var bag = {
+  let bag = {
     opts: opts,
     relativeUrl: relativeUrl,
     token: this.token
@@ -108,7 +104,7 @@ Adapter.prototype.put = function (relativeUrl, json, callback) {
 };
 
 Adapter.prototype.del = function (relativeUrl, callback) {
-  var opts = {
+  const opts = {
     method: 'DELETE',
     url: this.baseUrl + relativeUrl,
     headers: {
@@ -119,7 +115,7 @@ Adapter.prototype.del = function (relativeUrl, callback) {
     }
   };
 
-  var bag = {
+  let bag = {
     opts: opts,
     relativeUrl: relativeUrl,
     token: this.token
@@ -138,11 +134,11 @@ Adapter.prototype.del = function (relativeUrl, callback) {
 
 // common helper methods
 function _performCall(bag, next) {
-  var who = bag.who + '|' + _performCall.name;
+  let who = bag.who + '|' + _performCall.name;
 
   bag.startedAt = Date.now();
   request(bag.opts, function (err, res, body) {
-    var interval = Date.now() - bag.startedAt;
+    let interval = Date.now() - bag.startedAt;
 
     bag.res = res;
     bag.body = body;
@@ -155,7 +151,7 @@ function _performCall(bag, next) {
 }
 
 function _parseResponse(bag, next) {
-  var who = bag.who + '|' + _parseResponse.name;
+  let who = bag.who + '|' + _parseResponse.name;
 
   if (bag.res && bag.res.headers.link) {
     bag.headerLinks = parseLinks(bag.res.headers.link);
@@ -184,15 +180,15 @@ Adapter.prototype.getCurrentUser = function (callback) {
 };
 
 Adapter.prototype.postIssue = function (owner, repo, body, callback) {
-  var allIssues = [];
-  var self = this;
-  var url = '/repos/' + owner + '/' + repo +'/issues';
+  let allIssues = [];
+  let self = this;
+  let url = '/repos/' + owner + '/' + repo +'/issues';
   this.post(url, body, callback);
 };
 
 Adapter.prototype.getIssue = function (owner, repo, number, callback) {
-  var allIssues = [];
-  var self = this;
-  var url = '/repos/' + owner + '/' + repo +'/issues/' + number;
+  let allIssues = [];
+  let self = this;
+  let url = '/repos/' + owner + '/' + repo +'/issues/' + number;
   this.get(url, callback);
 };
