@@ -171,7 +171,8 @@ function _getIssue(bag, next) {
   var who = `${bag.who} | ${_getIssue.name}`;
   logger.debug(`>Inside ${who}`);
 
-  bag.adapter.getIssue('harryi3t', '5134', 1,
+  bag.adapter.getIssue(bag.userinput.owner, bag.userinput.repo,
+    bag.userinput.issueNumber,
     function (err, data) {
       if (err) return next(err);
 
