@@ -15,7 +15,6 @@ module.exports = function (grunt) {
     babel: {
       dist: {
         files: {
-          'dist/Adapter.js': 'src/Adapter.js',
           'dist/logger.js': 'src/logger.js',
           'dist/script.js': 'src/script.js',
           'dist/parser.js': 'src/parser.js',
