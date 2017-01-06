@@ -8,6 +8,9 @@
     "build": "babel src --out-dir dist",
     "start": "node dist/script.js"
   },
+  "bin": {
+    "githubIO": "dist/script.js"
+  },
   "author": "Harendra Singh <66hari@gmail.com> (https://harryi3t.github.io)",
   "license": "ISC",
   "dependencies": {

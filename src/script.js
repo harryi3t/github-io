@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 import _ from 'underscore';
 import async from 'async';
 import fs from 'fs';
