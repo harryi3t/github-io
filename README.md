@@ -14,10 +14,8 @@ The supported syntax for the `PM Issue` is like this
 
 ### Usage
 ```
-git clone git@github.com:harryi3t/githubIO.git
-cd githubIO
-yarn // or npm install
-npm start (PM Issue URL) (Default Repo)
+npm install -g github_io
+githubIO (PM Issue URL) (Default repo to open issues in, if not provided in the pm issue description)
 ```
 
 ### Example
@@ -40,7 +38,7 @@ The application must support adding, updating and deleting a TODO.
 ```
 And following Usage
 ```
-npm start https://github.com/orgName/pmRepoName/issues/1234 testApiRepo
+githubIO https://github.com/orgName/pmRepoName/issues/1234 testApiRepo
 ```
 
 #### Following tasks will be opened in https://github.com/orgName/testApiRepo
@@ -61,8 +59,9 @@ The value `docsRepo` from the description has overridden the default repo value
 
 ![image][screenshot]
 
-[screenshot]: https://cloud.githubusercontent.com/assets/5207331/21080518/35d4bd40-bfd7-11e6-9a46-48ed08779fa6.png
+[screenshot]: https://cloud.githubusercontent.com/assets/5207331/21742989/b31af0c8-d51f-11e6-85e8-793086402c0c.png
 [travis-badge]: https://travis-ci.org/harryi3t/githubIO.svg?branch=master
 [shippable-badge]: https://img.shields.io/shippable/584d675f938d4210003b61db.svg?label=shippable
 [shippable-project]: https://app.shippable.com/projects/584d675f938d4210003b61db/status/dashboard
 [travis-project]: https://travis-ci.org/harryi3t/githubIO
+
