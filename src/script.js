@@ -41,8 +41,10 @@ function init() {
       _createIssues.bind(null, bag)
     ],
     function (err) {
-      if (err)
+      if (err) {
         logger.error(icons.cross, 'Completed with error: ', err);
+        process.exit(1);
+      } else process.exit();
     }
   );
 }
