@@ -14,7 +14,7 @@ The supported syntax for the `PM Issue` is like this
 
 ### Usage
 ```
-npm install -g github_io
+npm install -g github-io
 githubIO (PM Issue URL) (Default repo to open issues in, if not provided in the pm issue description)
 ```
 
@@ -38,7 +38,7 @@ The application must support adding, updating and deleting a TODO.
 ```
 And following Usage
 ```
-githubIO https://github.com/orgName/pmRepoName/issues/1234 testApiRepo
+github-io https://github.com/orgName/pmRepoName/issues/1234 testApiRepo
 ```
 
 #### Following tasks will be opened in https://github.com/orgName/testApiRepo
@@ -64,4 +64,3 @@ The value `docsRepo` from the description has overridden the default repo value
 [shippable-badge]: https://img.shields.io/shippable/584d675f938d4210003b61db.svg?label=shippable
 [shippable-project]: https://app.shippable.com/projects/584d675f938d4210003b61db/status/dashboard
 [travis-project]: https://travis-ci.org/harryi3t/githubIO
-
