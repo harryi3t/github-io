@@ -60,7 +60,7 @@ The value `docsRepo` from the description has overridden the default repo value
 ![image][screenshot]
 
 [screenshot]: https://cloud.githubusercontent.com/assets/5207331/21742989/b31af0c8-d51f-11e6-85e8-793086402c0c.png
-[travis-badge]: https://travis-ci.org/harryi3t/githubIO.svg?branch=master
+[travis-badge]: https://travis-ci.org/harryi3t/github-io.svg?branch=master
 [shippable-badge]: https://img.shields.io/shippable/584d675f938d4210003b61db.svg?label=shippable
 [shippable-project]: https://app.shippable.com/projects/584d675f938d4210003b61db/status/dashboard
-[travis-project]: https://travis-ci.org/harryi3t/githubIO
+[travis-project]: https://travis-ci.org/harryi3t/github-io
